@@ -11,7 +11,7 @@ extern "C" {
 #include <linux/semaphore.h>
 #endif
 
-#define SIZE_OF_BUFFER 100
+#define SIZE_OF_BUFFER 20
 #define DATA_LENGTH 1024
 
 typedef struct node_421 {
@@ -30,6 +30,7 @@ long init_buffer_421(void);
 long enqueue_buffer_421(char *data);
 long dequeue_buffer_421(char *data);
 long delete_buffer_421(void);
+void print_semaphores(void);
 #endif
 
 #ifdef __cplusplus

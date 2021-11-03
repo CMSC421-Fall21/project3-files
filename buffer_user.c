@@ -3,6 +3,9 @@
 #include "buffer.h"
 
 static ring_buffer_421_t buffer;
+static sem_t mutex;
+static sem_t fill_count;
+static sem_t empty_count;
 
 long init_buffer_421(void) {
 	// Note: You will need to initialize semaphores in this function.
@@ -30,11 +33,14 @@ long init_buffer_421(void) {
 	buffer.write = node;
 	buffer.length = 0;
 
+	// Initialize your semaphores here.
+	// TODO
+
 	return 0;
 }
 
 long enqueue_buffer_421(char * data) {
-	// NOTE: You have to modify this function for it to work correctly.
+	// NOTE: You have to modify this function to use semaphores.
 	if (!buffer.write) {
 		printf("write_buffer_421(): The buffer does not exist. Aborting.\n");
 		return -1;
@@ -74,4 +80,18 @@ long delete_buffer_421(void) {
 	buffer.write = NULL;
 	buffer.length = 0;
 	return 0;
+}
+
+void print_semaphores(void) {
+	// You can call this method to check the status of the semaphores.
+	// Don't forget to initialize them first!
+	// YOU DO NOT NEED TO IMPLEMENT THIS FOR KERNEL SPACE.
+	int value;
+	sem_getvalue(&mutex, &value);
+	printf("sem_t mutex = %d\n", value);
+	sem_getvalue(&fill_count, &value);
+	printf("sem_t fill_count = %d\n", value);
+	sem_getvalue(&empty_count, &value);
+	printf("sem_t empty_count = %d\n", value);
+	return;
 }
